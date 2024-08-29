@@ -1,0 +1,20 @@
+// C# Builtin BinarySearch
+
+using System;
+using System.Collections.Generic;
+
+class BuiltinBinarySearch
+{
+    
+    public static void Main(string[] args)
+    {
+        
+        int[] a = new int[6] {1, 2, 3, 4, 5, 6};
+        
+        Console.WriteLine("Element found at index : " + Array.BinarySearch(a, 6));
+        
+        // so builtin binary search takes to arguments : one is the number which searching and the other is the whole number
+        
+        
+    }
+}
