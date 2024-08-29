@@ -1,0 +1,33 @@
+// Linear Search
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class LinearSearch
+{
+    
+    public static void Main(string[] args) {
+        
+        int[] a = new int[] {1,2,3,4,5};
+        int target  = 3;
+        
+        int index = linearSearch(a.ToList(), target);
+        Console.WriteLine("Elements found at index: " + index);
+        
+        }
+    
+    static int linearSearch(List<int> elements, int x)
+    {
+        
+        int Length = elements.Count;
+        
+        for(int i = 0; i < Length; i++) 
+        {
+            if(elements[i] == x) 
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
