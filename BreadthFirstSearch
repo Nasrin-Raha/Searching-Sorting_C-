@@ -1,0 +1,89 @@
+// Breadth First Search in c#
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+
+class Node{
+    
+    public Node left;
+    public Node right;
+    public int data ;
+    
+}
+
+
+class BreadthFirstSearch
+{
+    
+    public static void Main(string[] args){
+        
+    }
+    //BreadthFirstSearchOnTree
+    
+    public void BreadthFirstSearchOnTree(Node root)
+    {
+        Queue<Node> nodes = new Queue<Node>();
+        
+        if(root == null)
+        {
+            return;
+        }
+        
+        nodes.Enqueue(root);
+        while(nodes.Count > 0)
+        {
+            Node node = nodes.Dequeue();
+            Console.WriteLine(" " + node.data);
+            if(node.left != null)
+            {
+                nodes.Enqueue(node.left);
+            }
+            
+            if(node.right != null)
+            {
+                nodes.Enqueue(node.right);
+            }
+        }
+    }
+    
+    
+    // BreadthFirstSearchOnGraph
+    
+    public HashSet<int> BreadthFirstSearchOnGraph(Node root)
+    {
+        HashSet<int> visited = new HashSet<int>();
+        
+        if(!graph.AdjacencyList.ContainsKey(root))
+        {
+            return visited;
+        }
+        
+        Queue<int> q = new Queue<int>();
+        q.Enqueue(root.data);
+        
+        while(q.Count > 0)
+        {
+            int vertex = q.Dequeue();
+            
+            if(visited.Contains(vertex))
+            {
+                continue;
+            }
+            
+            visited.Add(vertex);
+            
+            foreach(var neighbour in graph.AdjacencyList[vertex])
+            {
+                if(!visited.Contains(neighbour))
+                {
+                    q.Enqueue(neighbour);
+                }
+            }
+        }
+    }
+   
+    
+    
+}
