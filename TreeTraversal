@@ -1,0 +1,79 @@
+// Tree Traversal  using inroder, preorder, postorder
+
+using System;
+
+class Node
+{
+    public Node left;
+    public Node right;
+    public int data;
+}
+
+class TreeTraversal
+{
+    static void InOrderTraversal(Node root)
+    {
+        if (root != null)
+        {
+            InOrderTraversal(root.left);
+            Console.Write(root.data + " ");
+            InOrderTraversal(root.right);
+        }
+    }
+
+    static void PreOrderTraversal(Node root)
+    {
+        if (root != null)
+        {
+            Console.Write(root.data + " ");
+            PreOrderTraversal(root.left);
+            PreOrderTraversal(root.right);
+        }
+    }
+
+    static void PostOrderTraversal(Node root)
+    {
+        if (root != null)
+        {
+            PostOrderTraversal(root.left);
+            PostOrderTraversal(root.right);
+            Console.Write(root.data + " ");
+        }
+    }
+
+    public static void Main(string[] args)
+    {
+        Node leftNode = new Node()
+        {
+            data = 1,
+            left = null,
+            right = null
+        };
+
+        Node rightNode = new Node()
+        {
+            data = 3,
+            left = null,
+            right = null
+        };
+
+        Node root = new Node()
+        {
+            data = 2,
+            left = leftNode,
+            right = rightNode
+        };
+
+        Console.WriteLine("In-Order Traversal:");
+        InOrderTraversal(root);
+        Console.WriteLine();  // To move to the next line
+
+        Console.WriteLine("Pre-Order Traversal:");
+        PreOrderTraversal(root);
+        Console.WriteLine();  // To move to the next line
+
+        Console.WriteLine("Post-Order Traversal:");
+        PostOrderTraversal(root);
+        Console.WriteLine();  // To move to the next line
+    }
+}
