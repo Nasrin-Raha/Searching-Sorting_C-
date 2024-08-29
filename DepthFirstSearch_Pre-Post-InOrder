@@ -1,0 +1,91 @@
+// DepthFirstSearch using inorder, preorder, postorder
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Node
+{
+    public int Value;
+    public Node left;
+    public Node right;
+    
+    public Node(int item)
+    { 
+        Value = item;
+        left = null;
+        right = null;
+        
+    }
+}
+
+public class DepthFirstSearch
+{
+    
+    public static void Main(string[] args)
+    {
+        DepthFirstSearch dfs = new DepthFirstSearch();
+        
+        dfs.root = new Node(1);
+        dfs.root.left = new Node(2);
+        dfs.root.right = new Node(3);
+        dfs.root.left.left = new Node(4);
+        dfs.root.left.right = new Node(5);
+        
+        
+        Console.WriteLine("PreOrderTraversal: ");
+        dfs.PreOrderTraversal(dfs.root);
+        
+        
+        Console.WriteLine("\nInOrderTraversal: ");
+        dfs.InOrderTraversal(dfs.root);
+        
+        
+        Console.WriteLine("\n PostOrderTraversal: ");
+        dfs.PostOrderTraversal(dfs.root);
+        
+        
+    }
+    
+    
+    public Node root;
+    
+    public void PreOrderTraversal(Node node)
+    {
+        if(node == null)
+        {
+            return;
+        }
+        // PreOrderTraversal is like: root-left-right
+        Console.Write(node.Value + " ");
+        PreOrderTraversal(node.left);
+        PreOrderTraversal(node.right);
+    }
+    
+    
+    public void InOrderTraversal(Node node)
+    {
+        if(node == null)
+        {
+            return;
+        }
+        // InOrderTraversal is like: left-root-right
+        InOrderTraversal(node.left);
+        Console.Write(node.Value + " ");
+        InOrderTraversal(node.right);
+    }
+    
+    public void PostOrderTraversal(Node node)
+    {
+        if(node == null)
+        {
+            return;
+        }
+        //PostOrderTraversal is like: left-right-root
+        
+        PostOrderTraversal(node.left);
+        PostOrderTraversal(node.right);
+        Console.Write(node.Value + " ");
+    }
+    
+}
