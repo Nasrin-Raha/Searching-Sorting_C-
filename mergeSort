@@ -1,0 +1,97 @@
+// MergeSort: Breaks the collection down until it can be split anymore. then merge it back together sorting as it goes.
+
+/*
+
+38   27  43  3  9  82  10
+38  27  43  3             9  82  10
+38  27      43  3         9  82     10
+38  27  43  3  9  82  10
+27  38    3  43   9  10  82
+3  9  10  27  38  43  82                                //sorted
+
+*/
+
+using System;
+
+class MergeSort
+{
+    public static int[] mergeSort(int[] array)
+    {
+        // Base case: If the array length is 1 or less, it's already sorted
+        if (array.Length <= 1)
+        {
+            return array;
+        }
+
+        // Find the midpoint
+        int midPoint = array.Length / 2;
+
+        // Split the array into left and right
+        int[] left = new int[midPoint];
+        int[] right = (array.Length % 2 == 0) ? new int[midPoint] : new int[midPoint + 1];
+
+        // Populate the left and right arrays
+        for (int i = 0; i < midPoint; i++)
+        {
+            left[i] = array[i];
+        }
+
+        for (int i = midPoint; i < array.Length; i++)
+        {
+            right[i - midPoint] = array[i];
+        }
+
+        // Recursively sort the left and right halves
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        // Merge the sorted halves
+        return merge(left, right);
+    }
+
+    public static int[] merge(int[] left, int[] right)
+    {
+        int resultLength = left.Length + right.Length;
+        int[] result = new int[resultLength];
+        int indexLeft = 0, indexRight = 0, indexResult = 0;
+
+        // Merge the left and right arrays
+        while (indexLeft < left.Length || indexRight < right.Length)
+        {
+            if (indexLeft < left.Length && indexRight < right.Length)
+            {
+                if (left[indexLeft] <= right[indexRight])
+                {
+                    result[indexResult++] = left[indexLeft++];
+                }
+                else
+                {
+                    result[indexResult++] = right[indexRight++];
+                }
+            }
+            else if (indexLeft < left.Length)
+            {
+                result[indexResult++] = left[indexLeft++];
+            }
+            else if (indexRight < right.Length)
+            {
+                result[indexResult++] = right[indexRight++];
+            }
+        }
+
+        return result;
+    }
+
+    public static void Main(string[] args)
+    {
+        int[] array = { 38, 27, 43, 3, 9, 82, 10 };
+
+        Console.WriteLine("Original Array:");
+        Console.WriteLine(string.Join(" ", array));
+
+        int[] sortedArray = mergeSort(array);
+
+        Console.WriteLine("Sorted Array:");
+        Console.WriteLine(string.Join(" ", sortedArray));
+    }
+}
