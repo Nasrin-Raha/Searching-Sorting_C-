@@ -1,0 +1,47 @@
+using System;
+
+class ShellSort
+{
+    public static void Main(string[] args)
+    {
+        int[] array = { 12, 34, 54, 2, 3 };
+
+        Console.WriteLine("Original Array:");
+        Console.WriteLine(string.Join(" ", array));
+
+        ShellSortArray(array);
+
+        Console.WriteLine("Sorted Array:");
+        Console.WriteLine(string.Join(" ", array));
+    }
+
+    public static void ShellSortArray(int[] array)
+    {
+        int n = array.Length;
+
+        // Start with a big gap, then reduce the gap
+        for (int gap = n / 2; gap > 0; gap /= 2)
+        {
+            // Perform a gapped insertion sort for this gap size.
+            // The first gap elements array[0..gap-1] are already in gapped order.
+            // Keep adding one more element until the entire array is gap sorted.
+            for (int i = gap; i < n; i++)
+            {
+                // Add array[i] to the elements that have been gap sorted.
+                // Save array[i] in temp and make a hole at position i.
+                int temp = array[i];
+
+                // Shift earlier gap-sorted elements up until the correct location
+                // for array[i] is found.
+                int j;
+                for (j = i; j >= gap && array[j - gap] > temp; j -= gap)
+                {
+                    array[j] = array[j - gap];
+                }
+
+                // Put temp (the original array[i]) in its correct location.
+                array[j] = temp;
+            }
+        }
+    }
+}
